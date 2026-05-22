@@ -34,6 +34,13 @@ export default gql`
     quantity: Int
     price: Float
   }
+  
+  type Message {
+  id: ID!
+  sender: User
+  text: String
+  createdAt: String
+  }
 
   type Order {
     id: ID!
@@ -51,6 +58,12 @@ export default gql`
       comment: String
   }
 
+  type Chat {
+      id: ID!
+      users: [User]
+      messages: [Message]
+  }
+
   type Query {
     test: String
     products: [Product]
@@ -58,6 +71,8 @@ export default gql`
     cart: Cart
     orders: [Order]
     reviews(productId: ID!): [Review]
+    myChats: [Chat]
+    chat(chatId: ID!): Chat
   }
 
 
@@ -90,6 +105,14 @@ export default gql`
     
     #9
     addReview(productId: ID!, rating: Int, comment: String) : Review
+
+    #10
+    createChat(userId: ID!): Chat
+    #11
+    sendMessage(
+      chatId: ID!
+      text: String!
+    ): Chat
     
     }
 `;

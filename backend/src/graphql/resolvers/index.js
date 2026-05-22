@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import Cart from "../../models/Cart.js";
 import Order from "../../models/Order.js";
 import Review from "../../models/Review.js";
+import Chat from "../../models/Chat.js";
 
 export default {
   Query: {
@@ -38,6 +39,36 @@ export default {
       })
       .populate("user", "name")
       .populate("product");
+    },
+    //7
+    myChats: async (_, __, { user }) => {
+
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      return await Chat.find({
+        users: user.id
+      })
+      .populate("users", "name email")
+      .populate("messages.sender", "name");
+    },
+    //8
+    chat: async (_, { chatId }, { user }) => {
+
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      const chat = await Chat.findById(chatId)
+        .populate("users", "name email")
+        .populate("messages.sender", "name");
+
+      if (!chat) {
+        throw new Error("Chat not found");
+      }
+
+      return chat;
     }
   },
 
@@ -240,6 +271,79 @@ export default {
       });
 
       return await review.populate("user product");
+    },
+
+    //10
+    createChat: async (_, { userId }, { user }) => {
+
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      // prevent self-chat
+      if (user.id === userId) {
+        throw new Error("Cannot chat with yourself");
+      }
+
+      // check existing chat
+      let existingChat = await Chat.findOne({
+        users: {
+          $all: [user.id, userId]
+        }
+      })
+      .populate("users");
+
+      if (existingChat) {
+        return existingChat;
+      }
+
+      const chat = await Chat.create({
+        users: [user.id, userId],
+        messages: []
+      });
+
+      return await chat.populate("users");
+    },
+
+    //11
+    sendMessage: async (_, { chatId, text }, { user }) => {
+
+      if (!user) {
+        throw new Error("Unauthorized");
+      }
+
+      const chat = await Chat.findById(chatId);
+
+      if (!chat) {
+        throw new Error("Chat not found");
+      }
+
+      // verify user belongs to chat
+      const isMember = chat.users.some(
+        u => u.toString() === user.id
+      );
+
+      if (!isMember) {
+        throw new Error("Not part of this chat");
+      }
+
+      chat.messages.push({
+        sender: user.id,
+        text
+      });
+
+      await chat.save();
+
+      return await chat.populate([
+        {
+          path: "users",
+          select: "name email"
+        },
+        {
+          path: "messages.sender",
+          select: "name"
+        }
+      ]);
     }
   },
   Product: {
