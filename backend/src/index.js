@@ -18,10 +18,29 @@ const io = new Server(httpServer,{
   }
 })
 
+app.get('/',(req,res)=>{
+  res.send("Hi I am listening")
+})
 
 io.on("connection",(socket)=>{
   console.log("user connected : ", socket.id)
 
+  // join chat room
+  socket.on("join_chat", (chatId) => {
+
+    socket.join(chatId);
+
+    console.log(`Socket ${socket.id} joined room ${chatId}`);
+  });
+
+   // receive message from frontend
+  socket.on("send_message", (data) => {
+
+    console.log("message received:", data);
+
+    // send to everyone in room except sender
+    socket.to(data.chatId).emit("receive_message", data);
+  });
   socket.on("disconnect",()=>{
     console.log("disconnected user : ",socket.id)
   })

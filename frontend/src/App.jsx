@@ -1,10 +1,8 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
 import { useEffect } from 'react'
-import socket from './socket'
+import socket from './socket/socket'
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ChatPage from './pages/ChatPage';
+
 
 function App() {
   useEffect(()=>{
@@ -20,6 +18,11 @@ function App() {
   return (
     <>
       <h1>Hello server testing</h1>
+      <Router>
+        <Routes>
+          <Route path="/chat/:chatId" element={<ChatPage />} />
+        </Routes>
+      </Router>
     </>
   )
 }
