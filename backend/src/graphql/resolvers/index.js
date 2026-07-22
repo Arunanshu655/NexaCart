@@ -81,9 +81,12 @@ export default {
     //2
     login: async (_, { email, password }) => {
       const user = await User.findOne({ email });
+      if (!user) {
+          throw new Error("User not found");
+      }
       const valid = await bcrypt.compare(password, user.password);
 
-      if (!valid) throw new Error("Invalid credentials");
+      if (!valid) throw new Error("Password mismatch with user");
 
       return jwt.sign({ id: user._id }, "SECRET");
     },
@@ -99,6 +102,7 @@ export default {
     },
 
     // CART MUTATIONS****************************
+
     //add product to cart******************************************
     //4
     addToCart: async (_, { productId, quantity }, { user }) => {
