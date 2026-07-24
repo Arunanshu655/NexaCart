@@ -9,10 +9,10 @@ import client from "./apollo/client";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
     <ApolloProvider client={client}>
+    <AuthProvider>
     <App />
-    </ApolloProvider>
     </AuthProvider>
+    </ApolloProvider>
   </StrictMode>,
 )
