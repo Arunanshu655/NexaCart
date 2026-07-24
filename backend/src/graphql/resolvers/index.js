@@ -88,7 +88,7 @@ export default {
 
       if (!valid) throw new Error("Password mismatch with user");
 
-      return jwt.sign({ id: user._id }, "SECRET");
+      return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     },
     //3
     addProduct: async (_, { name, price, description, seller},{user}) => {

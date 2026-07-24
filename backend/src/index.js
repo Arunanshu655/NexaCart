@@ -22,6 +22,10 @@ app.get('/',(req,res)=>{
   res.send("Hi I am listening")
 })
 
+app.get('/test',(req,res)=>{
+  console.log(req.header)
+})
+
 io.on("connection",(socket)=>{
   console.log("user connected : ", socket.id)
 
@@ -49,12 +53,14 @@ io.on("connection",(socket)=>{
 const server = new ApolloServer({
   schema,
   context: ({ req }) => {
-    const token = req.headers.authorization || "";
-    // console.log("Received token:", token);
+    const raw = req.headers.authorization || "";
+    const token = raw.split(" ")[1]
+    console.log("Received token:", token);
+    
     try{
       
       const user = jwt.verify(token, process.env.JWT_SECRET);
-      // console.log("User:", user);
+      console.log("from User:", user);
       return { user };
 
     }catch(err){
@@ -68,7 +74,6 @@ await server.start();
 server.applyMiddleware({ app });
 console.log("Connecting to MongoDB...");
 await mongoose.connect(process.env.MONGO_URI);
-
 httpServer.listen(port, () => {
   console.log(`Server ready at http://localhost:${port}${server.graphqlPath}`);
 });
