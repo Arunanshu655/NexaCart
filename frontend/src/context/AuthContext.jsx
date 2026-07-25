@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
         token,
         login,
         logout,
-        isAuthenticated: !!token
+        isAuthenticated: (token ? true : false)
       }}
     >
 
