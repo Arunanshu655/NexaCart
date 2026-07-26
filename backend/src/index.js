@@ -54,7 +54,7 @@ const server = new ApolloServer({
   schema,
   context: ({ req }) => {
     const raw = req.headers.authorization || "";
-    const token = raw.split(" ")[1]
+    const token = raw.split(" ").length > 1 ? raw.split(" ")[1] : raw
     console.log("Received token:", token);
     
     try{
