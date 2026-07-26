@@ -69,7 +69,13 @@ export default {
       }
 
       return chat;
-    }
+    },
+    me: async(_,__,context) => {
+      // console.log("context" + " [ " + context+" ]")
+      if(!context.user) throw new Error("Unauthorized")
+
+        return await User.findById(context.user.id) 
+    } 
   },
 
   Mutation: {

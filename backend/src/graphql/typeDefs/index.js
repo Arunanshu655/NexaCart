@@ -1,4 +1,4 @@
-//typeDefs/index.js
+ //typeDefs/index.js
 import { gql } from "apollo-server-express";
 
 export default gql`
@@ -65,14 +65,15 @@ export default gql`
   }
 
   type Query {
-    test: String
-    products: [Product]
-    product(id: ID!): Product
-    cart: Cart
-    orders: [Order]
-    reviews(productId: ID!): [Review]
-    myChats: [Chat]
-    chat(chatId: ID!): Chat
+    test: String  # 1
+    products: [Product]  #2
+    product(id: ID!): Product  #3
+    cart: Cart  #4
+    orders: [Order]   #5
+    reviews(productId: ID!): [Review]  #6
+    myChats: [Chat]  #7
+    chat(chatId: ID!): Chat  #8
+    me: User  #9
   }
 
 
