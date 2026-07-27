@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext, useState, useEffect } from "react";
+import { useLazyQuery, useQuery } from "@apollo/client/react";
+import {GET_ME} from "../graphql/queries/userQueries"
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -7,6 +8,22 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
     localStorage.getItem("token")
   );
+  const [user, setUser] = useState(null);
+
+    const { data, loading, error } = useQuery(GET_ME, {
+    skip: !token,              // don’t run if no token
+    fetchPolicy: "network-only"
+  });
+
+  useEffect(() => {
+    if (data?.me) {
+      setUser(data.me);
+    }
+    if (error) {
+      logout();
+    }
+  }, [data, error]);
+
 
   const login = (jwt) => {
 
@@ -21,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
 
     setToken(null);
+    setUser(null);
 
   };
 
@@ -31,7 +49,10 @@ export const AuthProvider = ({ children }) => {
         token,
         login,
         logout,
-        isAuthenticated: (token ? true : false)
+        // fetchMe,
+        isAuthenticated: (token ? true : false),
+        user,
+        setUser
       }}
     >
 
