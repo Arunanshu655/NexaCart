@@ -5,15 +5,15 @@ import ChatPage from './pages/ChatPage';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import { useAuth } from './context/AuthContext';
-
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
 
 function App() {
   const {token} = useAuth()
   useEffect(()=>{
-
-    
-
-    console.log(token)
+    console.log("fetch me calling ....")
+    // fetchMe()
+    console.log("fetch me  called")
     socket.on("connect", () => {
       console.log("Connected:", socket.id);
     });
@@ -27,10 +27,12 @@ function App() {
     <>
       <h1>Hello server testing</h1>
       <Router>
+      <Navbar/>
         <Routes>
           <Route path="/chat/:chatId" element={<ChatPage />} />
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login"element={<Login />}></Route>
+          <Route path="/Home"element={<Home />}></Route>
         </Routes>
       </Router>
     </>
