@@ -33,6 +33,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/login"element={<Login />}></Route>
           <Route path="/Home"element={<Home />}></Route>
+          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
         </Routes>
       </Router>
     </>
