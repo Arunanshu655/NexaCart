@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import { useAuth } from './context/AuthContext';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
+import Cart from './pages/Cart';
 
 function App() {
   const {token} = useAuth()
