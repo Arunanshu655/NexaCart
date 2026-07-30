@@ -21,8 +21,11 @@ export default {
 
       if (!user) throw new Error("Unauthorized");
 
-      return await Cart.findOne({ user: user.id })
+        const userCart =  await Cart.findOne({ user: user.id })
         .populate("items.product").populate("user");
+      
+      // if(!userCart.data.cart) return {"message":"No items in your Cart"}
+      return userCart;
     },
     //5
     orders: async (_, __, { user }) => {
