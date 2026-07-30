@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 
 import { GET_CART } from "../graphql/queries/cartQueries";
 
@@ -13,15 +13,21 @@ const Cart = () => {
 
     if (error) return <h2>{error.message}</h2>;
 
+    console.log(data.cart)
     return (
 
         <div>
 
             <h1>My Cart</h1>
 
-            <CartList items={data.cart.items} />
+            {data.cart != null? 
+            <><CartList items={data.cart.items} />
 
             <CartSummary items={data.cart.items} />
+            </> :
+            <>
+            <h2>Nothing in your cart</h2>
+            </> }
 
         </div>
 
