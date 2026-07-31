@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Cart from './pages/Cart';
+import Products from './pages/Products';
 
 function App() {
   const {token} = useAuth()
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login"element={<Login />}></Route>
           <Route path="/Home"element={<Home />}></Route>
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
+          <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>}/>
         </Routes>
       </Router>
     </>
