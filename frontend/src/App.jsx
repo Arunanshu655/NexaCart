@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 import Cart from './pages/Cart';
 import Products from './pages/Products';
-
+import ProductDetails from './pages/ProductiDetails'
 function App() {
   const {token} = useAuth()
   useEffect(()=>{
@@ -38,6 +38,7 @@ function App() {
           <Route path="/Home"element={<Home />}></Route>
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
           <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>}/>
+          <Route path="/products/:id" element={<ProductDetails/>}/>
         </Routes>
       </Router>
     </>
