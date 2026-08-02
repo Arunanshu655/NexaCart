@@ -17,3 +17,30 @@ query q2{
   }
 }
 `
+export const GET_PRODUCT = gql`
+query GetProduct($id: ID!){
+    product(id:$id){
+
+        id
+        name
+        price
+        description
+
+        reviews{
+
+            id
+
+            rating
+
+            comment
+
+            user{
+                id
+                name
+            }
+
+        }
+
+    }
+}
+`;
