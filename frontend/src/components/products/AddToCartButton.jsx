@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client/react";
 
 import { ADD_TO_CART } from "../../graphql/mutations/cartMutations";
 
-const AddToCartButton = ({ productId }) => {
+const AddToCartButton = ({ productId , quantity=1}) => {
 
     const [addToCart, { loading }] =
         useMutation(ADD_TO_CART);
