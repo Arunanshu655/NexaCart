@@ -1,4 +1,5 @@
 // resolvers/index.js
+import mongoose from "mongoose";
 import User from "../../models/User.js";
 import Product from "../../models/Product.js";
 import bcrypt from "bcrypt";
@@ -15,7 +16,18 @@ export default {
     //2
     products: async () => await Product.find(),
     //3
-    product: async (_, { id }) => await Product.findById(id),
+    product: async (_, { id }) =>{
+      try {
+        // console.log(typeof(id))
+
+        const objectId = new mongoose.Types.ObjectId(id);
+        // console.log(typeof(objectId))
+        return await Product.findById(objectId);
+      } catch (err) {
+        // console.log(err)
+        throw new Error("Invalid product ID format");
+      }
+    }, 
     //4
     cart: async (_, __, { user }) => {
 
