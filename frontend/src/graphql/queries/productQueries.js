@@ -18,7 +18,7 @@ query q2{
 }
 `
 export const GET_PRODUCT = gql`
-query GetProduct($id: ID!){
+query q3($id: ID!){
     product(id:$id){
 
         id

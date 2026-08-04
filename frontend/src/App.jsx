@@ -14,9 +14,9 @@ import ProductDetails from './pages/ProductiDetails'
 function App() {
   const {token} = useAuth()
   useEffect(()=>{
-    console.log("fetch me calling ....")
+    // console.log("fetch me calling ....")
     // fetchMe()
-    console.log("fetch me  called")
+    // console.log("fetch me  called")
     socket.on("connect", () => {
       console.log("Connected:", socket.id);
     });
@@ -38,7 +38,7 @@ function App() {
           <Route path="/Home"element={<Home />}></Route>
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
           <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>}/>
-          <Route path="/products/:id" element={<ProductDetails/>}/>
+          <Route path="/product/:id" element={<ProductDetails/>}/>
         </Routes>
       </Router>
     </>
