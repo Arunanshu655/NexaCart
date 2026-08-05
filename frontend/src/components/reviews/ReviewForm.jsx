@@ -1,3 +1,42 @@
+import { useState } from "react";
+import { useMutation } from "@apollo/client/react";
+import { ADD_REVIEW } from "../../graphql/mutations/reviewMutations";
+// import { gql } from "@apollo/client/";
+// import { ADD_TO_CART } from "../../graphql/mutations/cartMutations";
+
+// const ADD_REVIEW = gql`
+// mutation AddReview(
+//     $productId:ID!
+//     $rating:Int!
+//     $comment:String!
+// ){
+
+//     addReview(
+
+//         productId:$productId
+
+//         rating:$rating
+
+//         comment:$comment
+
+//     ){
+
+//         id
+
+//         rating
+
+//         comment
+
+//         user{
+//             id
+//             name
+//         }
+
+//     }
+
+// }
+// `;
+
 export const ReviewForm = ({ productId, onReviewAdded }) => {
 
     const [rating, setRating] = useState(5);
@@ -39,7 +78,7 @@ export const ReviewForm = ({ productId, onReviewAdded }) => {
         }
 
         catch (err) {
-
+            // console.log(err)
             alert(err.message);
 
         }
