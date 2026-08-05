@@ -52,7 +52,7 @@ export default {
       return await Review.find({
         product: productId
       })
-      .populate("user", "name")
+      .populate("user")
       .populate("product");
     },
     //7
