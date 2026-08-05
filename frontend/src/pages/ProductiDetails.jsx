@@ -48,9 +48,9 @@ const ProductDetails = () => {
 
             <hr />
 
-            {/* <h2>Reviews</h2> */}
+            <h2>Reviews</h2>
 
-            {/* <ReviewList
+             <ReviewList
                 reviews={product.reviews}
             />
 
@@ -59,7 +59,7 @@ const ProductDetails = () => {
             <ReviewForm
                 productId={product.id}
                 onReviewAdded={refetch}
-            /> */}
+            /> 
 
         </div>
 
