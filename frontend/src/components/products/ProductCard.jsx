@@ -1,4 +1,5 @@
 import AddToCartButton from "./AddToCartButton";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
 
@@ -12,7 +13,11 @@ const ProductCard = ({ product }) => {
             }}
         >
 
-            <h3>{product.name}</h3>
+            <h3>
+                <Link to={`/product/${product.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+                    {product.name}
+                </Link>
+            </h3>
 
             <p>{product.description}</p>
 
