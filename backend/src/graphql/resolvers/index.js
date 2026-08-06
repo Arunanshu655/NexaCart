@@ -233,7 +233,7 @@ export default {
   cart.items = [];
   await cart.save();
 
-  return await order.populate("items.product");
+  return await order.populate("items.product").populate("user");
     },
     //cancel order*********************************************
 
