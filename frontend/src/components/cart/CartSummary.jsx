@@ -1,3 +1,4 @@
+import CheckoutButton from "../orders/CheckOutButton";
 const CartSummary = ({ items }) => {
 
     const total = items.reduce((sum, item) => {
@@ -16,11 +17,7 @@ const CartSummary = ({ items }) => {
 
             <h2>Total: ₹{total}</h2>
 
-            <button>
-
-                Checkout
-
-            </button>
+            <CheckoutButton/>
 
         </div>
 
