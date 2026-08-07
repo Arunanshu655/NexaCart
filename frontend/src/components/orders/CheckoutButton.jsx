@@ -1,0 +1,66 @@
+import { useMutation } from "@apollo/client";
+
+import { CREATE_ORDER } from "../../graphql/mutations/orderMutations";
+
+import { GET_CART } from "../../graphql/queries/cartQueries";
+
+import { GET_ORDERS } from "../../graphql/queries/orderQueries";
+
+const CheckoutButton = () => {
+
+    const [checkout,{loading}] = useMutation(
+
+        CREATE_ORDER,
+
+        {
+
+            refetchQueries:[
+                {query:GET_CART},
+                {query:GET_ORDERS}
+            ]
+
+        }
+
+    );
+
+    const handleCheckout = async()=>{
+
+        try{
+
+            await checkout();
+
+            alert("Order placed successfully");
+
+        }
+
+        catch(err){
+
+            alert(err.message);
+
+        }
+
+    };
+
+    return(
+
+        <button
+
+            onClick={handleCheckout}
+
+            disabled={loading}
+
+        >
+
+            {loading
+
+                ? "Processing..."
+
+                : "Checkout"}
+
+        </button>
+
+    );
+
+};
+
+export default CheckoutButton;
