@@ -223,18 +223,19 @@ export default {
     };
   });
 
+  
+  // clear cart after order
+  
   const order = await Order.create({
     user: user.id,
     items: orderItems,
     totalPrice: total
-  });
-
-  // clear cart after order
+  })
+  // .populate("items.product").populate("user");
+  
   cart.items = [];
   await cart.save();
-
-  return await order.populate("items.product").populate("user");
-    },
+},
     //cancel order*********************************************
 
     //8
