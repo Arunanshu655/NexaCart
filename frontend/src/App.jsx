@@ -11,6 +11,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Cart from './pages/Cart';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductiDetails'
+import Order from './pages/Orders';
+
 function App() {
   const {token} = useAuth()
   useEffect(()=>{
@@ -39,6 +41,7 @@ function App() {
           <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
           <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>}/>
           <Route path="/product/:id" element={<ProductDetails/>}/>
+          <Route path="/orders"element={<Order />}></Route>
         </Routes>
       </Router>
     </>
