@@ -1,11 +1,10 @@
-import { useMutation } from "@apollo/client";
-
 import { CREATE_ORDER } from "../../graphql/mutations/orderMutations";
 
 import { GET_CART } from "../../graphql/queries/cartQueries";
 
 import { GET_ORDERS } from "../../graphql/queries/orderQueries";
 
+import { useMutation } from "@apollo/client/react";
 const CheckoutButton = () => {
 
     const [checkout,{loading}] = useMutation(
