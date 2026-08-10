@@ -89,7 +89,10 @@ export default {
       // console.log("context" + " [ " + context+" ]")
       if(!context.user) throw new Error("Unauthorized")
 
-        return await User.findById(context.user.id) 
+       const chat = await Chat.findOne({
+          _id: chatId,
+          users: user.id
+      });
     } 
   },
 
