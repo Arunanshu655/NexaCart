@@ -10,12 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@apollo/client": "^4.2.7",
+    "@apollo/client": "^4.2.10",
+    "@tailwindcss/vite": "^4.3.3",
     "graphql": "^16.14.2",
+    "lucide-react": "^1.31.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.18.1",
-    "socket.io-client": "^4.8.3"
+    "react-router-dom": "^7.18.2",
+    "react-toastify": "^11.1.0",
+    "socket.io-client": "^4.8.3",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
