@@ -85,15 +85,11 @@ export default {
 
       return chat;
     },
-    me: async(_,__,context) => {
-      // console.log("context" + " [ " + context+" ]")
-      if(!context.user) throw new Error("Unauthorized")
+    me: async (_, __, { user }) => {
+      if (!user) throw new Error("Unauthorized");
 
-       const chat = await Chat.findOne({
-          _id: chatId,
-          users: user.id
-      });
-    } 
+      return await User.findById(user.id);
+    },
   },
 
   Mutation: {
@@ -108,11 +104,13 @@ export default {
       if (!user) {
           throw new Error("User not found");
       }
+      console.log("user logging.....")
       const valid = await bcrypt.compare(password, user.password);
 
       if (!valid) throw new Error("Password mismatch with user");
 
-      return jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const res = await jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      return res;
     },
     //3
     addProduct: async (_, { name, price, description, seller},{user}) => {
