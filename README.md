@@ -106,7 +106,7 @@ http://localhost:4000/graphql
 
 ---
 
-## 📌 Core Functionalities
+## 📌 Core functionalities
 
 ### Authentication
 - Register User
@@ -132,7 +132,7 @@ http://localhost:4000/graphql
 - Add Product Reviews
 - Fetch Reviews
 
-### Realtime Chat
+### Realtime Chat seller to buyer
 - Create Chat
 - Send Messages
 - Live Message Updates using Socket.IO
@@ -150,3 +150,13 @@ http://localhost:4000/graphql
 - Notification System
 
 ---
+
+## 🛠️ project status (✅ done, ⏹️ not started, 🟡 running)
+### ✅ Authentication 
+### ✅ Product System 
+### ✅ Cart System 
+### ✅ Order System
+### ✅ Review System
+### 🟡 Styling
+### ⏹️ Chat System
+### ⏹️ AI System
