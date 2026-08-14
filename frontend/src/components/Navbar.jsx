@@ -35,7 +35,7 @@ const Navbar = () => {
             >
 
                 <Link to="/">
-                    <strong>ShopSphere</strong>
+                    <strong>Nexacart</strong>
                 </Link>
 
                 <Link to="/">
