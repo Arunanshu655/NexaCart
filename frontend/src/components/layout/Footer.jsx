@@ -1,4 +1,3 @@
-import {useState} from 'react'
 const Footer = () => {
 
     return (
@@ -15,7 +14,7 @@ const Footer = () => {
             "
         >
 
-            © {new Date().getFullYear()} ShopSphere.
+            © {new Date().getFullYear()} NexaCart.
             All Rights Reserved.
 
         </footer>
