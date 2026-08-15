@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(
     localStorage.getItem("token")
   );
+  
   const [user, setUser] = useState(null);
 
     const { data, loading, error } = useQuery(GET_ME, {
@@ -28,13 +29,15 @@ export const AuthProvider = ({ children }) => {
   const login = (jwt) => {
 
     localStorage.setItem("token", jwt);
-
+    
+    // console.log("stored token " + localStorage.getItem("token"))    
     setToken(jwt);
+    console.log("token "+token)
 
   };
 
   const logout = () => {
-
+    console.log("log out")
     localStorage.removeItem("token");
 
     setToken(null);
