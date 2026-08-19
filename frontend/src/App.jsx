@@ -1,51 +1,71 @@
-import { useEffect } from 'react'
-import socket from './socket/socket'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import ChatPage from './pages/ChatPage';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import { useAuth } from './context/AuthContext';
-import Home from './pages/Home';
-import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
-import Cart from './pages/Cart';
-import Products from './pages/Products';
+import { Routes, Route } from "react-router-dom";
+
+import MainLayout from "./layout/MainLayout";
+
+import Home from "./pages/Home";
+import Products from "./pages/Products";
 import ProductDetails from './pages/ProductiDetails'
-import Order from './pages/Orders';
+import Cart from "./pages/Cart";
+import Orders from "./pages/Orders";
 
-function App() {
-  const {token} = useAuth()
-  useEffect(()=>{
-    // console.log("fetch me calling ....")
-    // fetchMe()
-    // console.log("fetch me  called")
-    socket.on("connect", () => {
-      console.log("Connected:", socket.id);
-    });
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-    return () => {
-      socket.off("connect");
-    }
-  },[])
+import ProtectedRoute from "./components/ProtectedRoute";
 
+const App = () => {
   return (
-    <>
-      <h1>Hello server testing</h1>
-      <Router>
-      <Navbar/>
-        <Routes>
-          <Route path="/chat/:chatId" element={<ChatPage />} />
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/login"element={<Login />}></Route>
-          <Route path="/Home"element={<Home />}></Route>
-          <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>}/>
-          <Route path="/products" element={<ProtectedRoute><Products /></ProtectedRoute>}/>
-          <Route path="/product/:id" element={<ProductDetails/>}/>
-          <Route path="/orders"element={<Order />}></Route>
-        </Routes>
-      </Router>
-    </>
-  )
-}
+    <MainLayout>
 
-export default App
+      <Routes>
+
+        <Route
+          path="/"
+          element={<Home />}
+        />
+
+        <Route
+          path="/products"
+          element={<Products />}
+        />
+
+        <Route
+          path="/products/:id"
+          element={<ProductDetails />}
+        />
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <Orders />
+            </ProtectedRoute>
+          }
+        />
+
+      </Routes>
+
+    </MainLayout>
+  );
+};
+
+export default App;
