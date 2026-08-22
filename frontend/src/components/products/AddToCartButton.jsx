@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client/react";
 
 import { ADD_TO_CART } from "../../graphql/mutations/cartMutations";
-
+import Button from "../ui/Button";
 const AddToCartButton = ({ productId , quantity=1}) => {
 
     const [addToCart, { loading }] =
@@ -34,7 +34,7 @@ const AddToCartButton = ({ productId , quantity=1}) => {
 
     return (
 
-        <button
+        <Button
             disabled={loading}
             onClick={handleAdd}
         >
@@ -44,7 +44,7 @@ const AddToCartButton = ({ productId , quantity=1}) => {
                 : "Add to Cart"
             }
 
-        </button>
+        </Button>
 
     );
 
