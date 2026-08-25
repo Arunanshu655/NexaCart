@@ -1,30 +1,49 @@
+import { MessageSquare } from "lucide-react";
+
 import ReviewCard from "./ReviewCard";
 
 const ReviewList = ({ reviews }) => {
 
-    if (!reviews.length)
-        return <h3>No reviews yet.</h3>;
-
+  if (!reviews || reviews.length === 0) {
     return (
+      <div className="
+        rounded-[10px]
+        border border-dashed
+        border-[var(--border)]
+        bg-white
+        px-6 py-12
+        text-center
+      ">
 
-        <div>
+        <MessageSquare
+          size={32}
+          className="mx-auto text-gray-300"
+        />
 
-            {reviews.map(review => (
+        <h3 className="mt-4 font-medium">
+          No reviews yet
+        </h3>
 
-                <ReviewCard
+        <p className="mt-1 text-sm text-[var(--muted)]">
+          Be the first person to review this product.
+        </p>
 
-                    key={review.id}
-
-                    review={review}
-
-                />
-
-            ))}
-
-        </div>
-
+      </div>
     );
+  }
 
+  return (
+    <div className="space-y-4">
+
+      {reviews.map((review) => (
+        <ReviewCard
+          key={review.id}
+          review={review}
+        />
+      ))}
+
+    </div>
+  );
 };
 
 export default ReviewList;
