@@ -32,12 +32,12 @@ export const AuthProvider = ({ children }) => {
     
     // console.log("stored token " + localStorage.getItem("token"))    
     setToken(jwt);
-    console.log("token "+token)
+    // console.log("token "+token)
 
   };
 
   const logout = () => {
-    console.log("log out")
+    // console.log("log out")
     localStorage.removeItem("token");
 
     setToken(null);
