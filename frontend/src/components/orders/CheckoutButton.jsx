@@ -5,6 +5,7 @@ import { GET_CART } from "../../graphql/queries/cartQueries";
 import { GET_ORDERS } from "../../graphql/queries/orderQueries";
 
 import { useMutation } from "@apollo/client/react";
+import Button from "../ui/Button";
 const CheckoutButton = () => {
 
     const [checkout,{loading}] = useMutation(
@@ -42,7 +43,7 @@ const CheckoutButton = () => {
 
     return(
 
-        <button
+        <><Button
 
             onClick={handleCheckout}
 
@@ -56,7 +57,8 @@ const CheckoutButton = () => {
 
                 : "Checkout"}
 
-        </button>
+        </Button>
+        </>
 
     );
 
