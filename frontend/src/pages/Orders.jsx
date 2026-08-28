@@ -1,45 +1,79 @@
 import { useQuery } from "@apollo/client/react";
+import { Package } from "lucide-react";
 
 import { GET_ORDERS } from "../graphql/queries/orderQueries";
-
 import OrderList from "../components/orders/OrderList";
+import Skeleton from "../components/ui/Skeleton";
 
-const Orders = ()=>{
+const Orders = () => {
 
-    const{
+  const {
+    loading,
+    error,
+    data,
+  } = useQuery(GET_ORDERS);
 
-        loading,
+  if (loading) {
+    return (
+      <div className="space-y-6">
 
-        error,
+        <Skeleton className="h-10 w-40" />
 
-        data
+        <div className="space-y-5">
+          <Skeleton className="h-64 w-full" />
+          <Skeleton className="h-64 w-full" />
+        </div>
 
-    } = useQuery(GET_ORDERS);
+      </div>
+    );
+  }
 
-    if(loading)
+  if (error) {
+    return (
+      <div className="flex min-h-[50vh] items-center justify-center">
+        <p className="text-[var(--danger)]">
+          {error.message}
+        </p>
+      </div>
+    );
+  }
 
-        return <h2>Loading...</h2>;
+  const orders = data?.orders || [];
 
-    if(error)
+  return (
+    <div className="space-y-8">
 
-        return <h2>{error.message}</h2>;
+      {/* Header */}
+      <div className="flex items-center gap-3">
 
-    return(
+        <div className="
+          flex h-11 w-11
+          items-center justify-center
+          rounded-full
+          bg-blue-50
+          text-[var(--primary)]
+        ">
+          <Package size={21} />
+        </div>
 
         <div>
 
-            <h1>My Orders</h1>
+          <h1 className="text-3xl font-semibold tracking-tight">
+            My Orders
+          </h1>
 
-            <OrderList
-
-                orders={data.orders}
-
-            />
+          <p className="mt-1 text-sm text-[var(--muted)]">
+            Track and manage your purchases.
+          </p>
 
         </div>
 
-    );
+      </div>
 
+      <OrderList orders={orders} />
+
+    </div>
+  );
 };
 
 export default Orders;
