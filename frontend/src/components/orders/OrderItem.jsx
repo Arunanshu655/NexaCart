@@ -1,28 +1,65 @@
+import { ShoppingBag } from "lucide-react";
+
 const OrderItem = ({ item }) => {
 
-    return (
+  const subtotal =
+    item.price * item.quantity;
 
-        <div
-            style={{
-                border: "1px solid #ddd",
-                padding: "10px",
-                marginBottom: "10px",
-                borderRadius: "8px"
-            }}
-        >
+  return (
+    <div className="
+      flex
+      flex-col
+      gap-4
+      rounded-[10px]
+      bg-[var(--background)]
+      p-4
+      sm:flex-row
+      sm:items-center
+    ">
 
-            <h4>{item.product.name}</h4>
+      {/* Image Placeholder */}
+      <div className="
+        flex h-20 w-20
+        shrink-0
+        items-center justify-center
+        rounded-[10px]
+        bg-white
+      ">
+        <ShoppingBag
+          size={28}
+          strokeWidth={1.5}
+          className="text-gray-300"
+        />
+      </div>
 
-            <p>Price : ₹{item.price}</p>
+      {/* Product */}
+      <div className="min-w-0 flex-1">
 
-            <p>Quantity : {item.quantity}</p>
+        <h4 className="truncate text-sm font-semibold">
+          {item.product?.name || "Product"}
+        </h4>
 
-            <p>Subtotal : ₹{item.price * item.quantity}</p>
+        <p className="mt-1 text-xs text-[var(--muted)]">
+          ₹{item.price} × {item.quantity}
+        </p>
 
-        </div>
+      </div>
 
-    );
+      {/* Subtotal */}
+      <div className="sm:text-right">
 
+        <p className="text-xs text-[var(--muted)]">
+          Subtotal
+        </p>
+
+        <p className="mt-1 font-semibold">
+          ₹{subtotal.toFixed(2)}
+        </p>
+
+      </div>
+
+    </div>
+  );
 };
 
 export default OrderItem;
