@@ -1,72 +1,59 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client/react";
+import { MessageCircle } from "lucide-react";
 
-import socket from "../../socket/socket";
-
-import MessageList from "./MessageList";
-import MessageInput from "./MessageInput";
-
-import { GET_CHAT } from "../../graphql/queries/chatQueries";
-
-const ChatWindow = ({ chatId }) => {
-
-  const [messages, setMessages] = useState([]);
-
-  const { loading, error, data } = useQuery(GET_CHAT, {
-    variables: {
-      chatId
-    }
-  });
-
-  // Load old messages from GraphQL
-  useEffect(() => {
-
-    if (data?.chat) {
-      setMessages(data.chat.messages);
-    }
-
-  }, [data]);
-
-  // Join socket room
-  useEffect(() => {
-
-    socket.emit("join_chat", chatId);
-
-    socket.on("receive_message", (message) => {
-
-      setMessages(prev => [...prev, message]);
-
-    });
-
-    return () => {
-
-      socket.off("receive_message");
-
-    };
-
-  }, [chatId]);
-
-  if (loading) return <h3>Loading...</h3>;
-
-  if (error) return <h3>{error.message}</h3>;
+const ChatWindow = () => {
 
   return (
+    <section className="
+      hidden
+      min-h-[500px]
+      flex-col
+      bg-[#F5F5F7]
+      lg:flex
+    ">
 
-    <div className="chat-window">
+      {/* Empty State */}
+      <div className="
+        flex
+        flex-1
+        items-center
+        justify-center
+        text-center
+      ">
 
-      <MessageList
-        messages={messages}
-      />
+        <div>
 
-      <MessageInput
-        chatId={chatId}
-        setMessages={setMessages}
-      />
+          <div className="
+            mx-auto
+            flex h-16 w-16
+            items-center justify-center
+            rounded-full
+            bg-white
+            text-[var(--primary)]
+            shadow-sm
+          ">
+            <MessageCircle size={30} />
+          </div>
 
-    </div>
+          <h2 className="mt-5 text-xl font-semibold">
+            Select a conversation
+          </h2>
 
+          <p className="
+            mx-auto mt-2
+            max-w-sm
+            text-sm
+            text-[var(--muted)]
+          ">
+            Choose a conversation from the left to start
+            chatting.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
   );
-
 };
 
 export default ChatWindow;
