@@ -10,6 +10,7 @@ import Orders from "./pages/Orders";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Chat from './pages/Chat'
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -42,7 +43,7 @@ const App = () => {
         <Route
           path="/register"
           element={<Register />}
-        />
+        />                                                    
 
         <Route
           path="/cart"
@@ -61,6 +62,14 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/chat"
+  element={
+    <ProtectedRoute>
+      <Chat />
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
 
