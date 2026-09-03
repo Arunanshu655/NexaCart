@@ -8,6 +8,7 @@ import Cart from "../../models/Cart.js";
 import Order from "../../models/Order.js";
 import Review from "../../models/Review.js";
 import Chat from "../../models/Chat.js";
+import Message from "../../models/Message.js";
 
 export default {
   Query: {
@@ -65,8 +66,7 @@ export default {
       return await Chat.find({
         users: user.id
       })
-      .populate("users", "name email")
-      .populate("messages.sender", "name");
+      .populate("users", "name email");
     },
     //8
     chat: async (_, { chatId }, { user }) => {
@@ -76,8 +76,7 @@ export default {
       }
 
       const chat = await Chat.findById(chatId)
-        .populate("users", "name email")
-        .populate("messages.sender", "name");
+        .populate("users", "name email");
 
       if (!chat) {
         throw new Error("Chat not found");
@@ -325,8 +324,7 @@ export default {
       }
 
       const chat = await Chat.create({
-        users: [user.id, userId],
-        messages: []
+        users: [user.id, userId]
       });
 
       return await chat.populate("users");
@@ -353,24 +351,24 @@ export default {
       if (!isMember) {
         throw new Error("Not part of this chat");
       }
-
-      chat.messages.push({
+    
+      const message = await Message.create({
+        chat: chatId,
         sender: user.id,
         text
       });
 
+      chat.lastMessage = message.id;
       await chat.save();
 
-      return await chat.populate([
-        {
-          path: "users",
-          select: "name email"
-        },
-        {
-          path: "messages.sender",
-          select: "name"
-        }
-      ]);
+      return await message.populate("sender", "name");
+    }
+  },
+  Chat: {
+    messages: async (parent) => {
+      return await Message.find({ chat: parent.id })
+        .populate("sender", "name")
+        .sort({ createdAt: 1 });
     }
   },
   Product: {
