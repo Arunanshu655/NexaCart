@@ -113,7 +113,7 @@ export default gql`
     sendMessage(
       chatId: ID!
       text: String!
-    ): Chat
+    ): Message
     
     }
 `;
