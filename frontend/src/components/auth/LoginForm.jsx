@@ -73,7 +73,7 @@ const LoginForm = () => {
         </h2>
 
         <p className="mt-2 text-sm text-[var(--muted)]">
-          Sign in to continue to NexaCart
+          Sign in to continue to {import.meta.env.VITE_BRAND_NAME}
         </p>
       </div>
 

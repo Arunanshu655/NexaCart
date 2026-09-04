@@ -86,7 +86,7 @@ const Navbar = () => {
             shrink-0
           "
         >
-          NexaCart
+          {import.meta.env.VITE_BRAND_NAME}
         </Link>
 
         {/* Desktop Search */}

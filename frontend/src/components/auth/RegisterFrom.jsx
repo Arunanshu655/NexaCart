@@ -83,7 +83,7 @@ const RegisterForm = () => {
         </h2>
 
         <p className="mt-2 text-sm text-[var(--muted)]">
-          Join NexaCart today
+          Join {import.meta.env.VITE_BRAND_NAME} today
         </p>
       </div>
 

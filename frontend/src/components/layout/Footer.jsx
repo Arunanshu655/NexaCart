@@ -23,7 +23,7 @@ const Footer = () => {
               </div>
 
               <h2 className="text-xl font-semibold text-[var(--text)]">
-                NexaCart
+                {import.meta.env.VITE_BRAND_NAME}
               </h2>
             </div>
 
@@ -176,7 +176,7 @@ const Footer = () => {
           "
         >
           <p>
-            © {new Date().getFullYear()} NexaCart. All rights reserved.
+            © {new Date().getFullYear()} {import.meta.env.VITE_BRAND_NAME}. All rights reserved.
           </p>
 
           <p>
