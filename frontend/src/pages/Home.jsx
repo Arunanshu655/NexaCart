@@ -18,7 +18,7 @@ const Home = () => {
         <div className="max-w-3xl">
 
           <p className="mb-4 text-sm font-medium text-[var(--primary)]">
-            Welcome to NexaCart
+            Welcome to {import.meta.env.VITE_BRAND_NAME}
           </p>
 
           <h1 className="text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
@@ -61,7 +61,7 @@ const Home = () => {
 
         <div className="mb-8">
           <h2 className="text-2xl font-semibold">
-            Why NexaCart?
+            Why {import.meta.env.VITE_BRAND_NAME}?
           </h2>
 
           <p className="mt-2 text-sm text-[var(--muted)]">
