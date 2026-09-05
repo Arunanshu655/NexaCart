@@ -37,6 +37,10 @@ io.on("connection",(socket)=>{
     console.log(`Socket ${socket.id} joined room ${chatId}`);
   });
 
+  socket.on("leave_chat", (chatId) => {
+    socket.leave(chatId);
+  });
+
    // receive message from frontend
   socket.on("send_message", (data) => {
 
