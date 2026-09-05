@@ -1,10 +1,12 @@
-# NexaCart
+# NexaCarro
 
 A full-stack ecommerce platform built using the MERN stack with GraphQL and Apollo Server.  
 The project includes authentication, product management, cart and order handling, reviews, and a realtime buyer-seller chat system using Socket.IO.
 
 ---
+## 🦥🦥🦥 [Watch Demo](https://drive.google.com/file/d/1AuXFfQ0RveVFuXqSRpBd3WfS0LVajH4x/view?usp=sharing)
 
+---
 ## 🚀 Features
 
 - User Authentication with JWT
